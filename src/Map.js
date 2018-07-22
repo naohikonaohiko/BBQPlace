@@ -156,7 +156,11 @@ class MyMapComponent extends React.Component {
       return <GoogleMap
               onIdle = {this.mapMoved.bind(this)}
               defaultZoom={11}
-              defaultCenter={{ lat: 35.681167, lng: 139.767052 }}
+              
+              defaultCenter={{ lat: 35.712364, lng: 139.776188 }} // 上野駅
+              // defaultCenter={{ lat: 35.729374, lng: 139.791234 }} // 三ノ輪駅
+              // defaultCenter={{ lat: 35.733319, lng: 139.799056 }} // 南千住駅
+              // defaultCenter={{ lat: 35.681167, lng: 139.767052 }} // 東京駅
               ref = {this.mapLoaded.bind(this)}
               onZoomChanged= {this.zoomChanged.bind(this)}
              >
