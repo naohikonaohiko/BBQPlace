@@ -1,7 +1,7 @@
 {
   "name": "bbqplace",
   "version": "0.1.0",
-  "homepage": "https://naohikonaohiko.github.io/BBQPlace",
+  "homepage": "https://naohikonaohiko.github.io/BBQPlace/build",
   "private": true,
   "dependencies": {
     "react": "^16.4.1",
@@ -15,7 +15,5 @@
     "eject": "react-scripts eject",
     "deploy": "npm run build && gh-pages -d build"
   },
-  "devDependencies": {
-    "gh-pages": "^1.2.0"
-  }
+  "devDependencies": {}
 }
