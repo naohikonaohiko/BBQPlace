@@ -200,7 +200,7 @@ class MyMapComponent extends React.Component {
             onChangeComplete={this.handleOnChangeComplete}
             onChange={this.handleOnChange}
           />
-          <div className='value'>radius: {this.state.sliderValue}[m]</div>
+          <div className='value'>radius: {this.state.sliderValue / 1000 }[km]</div>
           <MyMapComponent
               googleMapURL={this.state.googleMapURL}
               loadingElement={<div style={{ height: `100%` }} />}
