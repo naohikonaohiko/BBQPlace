@@ -181,11 +181,11 @@ class MyMapComponent extends React.Component {
             max={28000}
             step={1000}
             value={this.state.sliderValue}
-            // value={this.state.sliderValue}
             onChangeStart={this.handleOnChangeStart}
             onChangeComplete={this.handleOnChangeComplete}
             onChange={this.handleOnChange}
           />
+          <div className='value'>radius: {this.state.sliderValue}[m]</div>
           <MyMapComponent
               googleMapURL={this.state.googleMapURL}
               loadingElement={<div style={{ height: `100%` }} />}
