@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 
-import { compose, withProps } from 'recompose';
+import { compose, lifecycle, withProps } from 'recompose';
 import {
   withScriptjs,
   withGoogleMap,
@@ -10,6 +10,9 @@ import {
   Marker,
   Circle
 } from 'react-google-maps';
+
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css';
 
 // 短期的 TODO
 
@@ -31,12 +34,25 @@ const googleMapsUrl = `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}`
 
 // react-google-maps
 const MyMapComponent = compose(
+  lifecycle({
+    shouldComponentUpdate() {
+      console.log(`shouldComponentUpdate`);
+    },
+    componentDidMount() {
+      console.log(`componentDidMount`);
+    }
+  }),
   withProps({
     googleMapURL: googleMapsUrl,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
     stations: [
+      {
+        name: "東京駅",
+        lat: 35.681167,
+        lng: 139.767052
+      },
       {
         name: "新浦安駅",
         lat: 35.632896,
@@ -88,54 +104,42 @@ const MyMapComponent = compose(
       strokeOpacity: 0.8,
       strokeWeight: 2,
       fillColor: '#FF0000',
-      fillOpacity: 0.35
+      fillOpacity: 0.10
     },
-    radius: 1000,
+    radius: 28000,
+    sliderValue: 14000,
   }),
   withScriptjs,
   withGoogleMap
 )(props => (
-  <GoogleMap defaultZoom={10} defaultCenter={{ lat: 35.681167, lng: 139.767052 }}>
-{/*
-      {props.isMarkerShown && (
-      <Marker position={{ lat: 35.681167, lng: 139.767052 }} />,
+  <div>
+    <GoogleMap
+      defaultZoom={10}
+      defaultCenter={{ lat: 35.681167, lng: 139.767052 }}>
+      {/*
+        {props.isMarkerShown && (
+        <Marker position={{ lat: 35.681167, lng: 139.767052 }} />,
       */}
-{/*
-      <Circle 
-        center={{ lat: 35.681167, lng: 139.767052 }}
-        radius={props.radius}
-        options={props.circleOptions}
-      />
-      <Circle 
-        center={{ lat: 35.632896, lng: 139.91256 }}
-        radius={props.radius}
-        options={props.circleOptions}
-      />
-      <MyCircle
-        lat={props.stations.station.lat}
-        lng={props.stations.station.lng}
-        center={props.stations.station[2]}
-        radius={props.radius} 
-        options={props.circleOptions} 
-      />
-*/}
-      <Hello />
-     {_.map(props.stations, (stations, index) => {
-       return (
-         <Hello />,
-         <MyCircle
-           key={index}
-           lat={props.stations[index].lat}
-           lng={props.stations[index].lng}
-           radius={props.radius}
-           options={props.circleOptions}
-       />
-       );
-     })}
-{/*
-    )}
-  */}
-  </GoogleMap>
+      {_.map(props.stations, (stations, index) => {
+        return (
+          <Hello />,
+          <MyCircle
+            key={index}
+            lat={props.stations[index].lat}
+            lng={props.stations[index].lng}
+            radius={props.radius}
+            options={props.circleOptions}
+        />
+        );
+      })}
+    </GoogleMap>
+    <Slider
+      min={1000}
+      max={28000}
+      value={props.sliderValue}
+      onChange={handleOnChange}
+    />
+  </div>
 ));
 
 class Hello extends React.Component {
@@ -157,6 +161,10 @@ const MyCircle = (props) => {
       options={props.options}
     />
   );
+};
+
+const handleOnChange = (props) => {
+  console.log(`handleOnChange props`);
 };
 
 export default MyMapComponent;
