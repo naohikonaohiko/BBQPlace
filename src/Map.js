@@ -34,27 +34,70 @@ const MyMapComponent = compose(
     googleMapURL: googleMapsUrl,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />
+    mapElement: <div style={{ height: `100%` }} />,
+    stations: {
+      station: {
+        name: "新浦安",
+        lat: 35.632896,
+        lng: 139.91256
+      }
+    },
+    circleOptions: {
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35
+    },
+    radius: 1000,
   }),
   withScriptjs,
   withGoogleMap
 )(props => (
-  <GoogleMap defaultZoom={12} defaultCenter={{ lat: 35.681167, lng: 139.767052 }}>
-    {props.isMarkerShown && (
+  <GoogleMap defaultZoom={11} defaultCenter={{ lat: 35.681167, lng: 139.767052 }}>
+{/*
+      {props.isMarkerShown && (
       <Marker position={{ lat: 35.681167, lng: 139.767052 }} />,
+      */}
+
       <Circle 
-        defaultCenter={{ lat: 35.681167, lng: 139.767052 }}
-        defaultRadius={1000}
-        options={{ 
-          strokeColor: '#FF0000',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#FF0000',
-        fillOpacity: 0.35,
-        }}
+        center={{ lat: 35.681167, lng: 139.767052 }}
+        radius={props.radius}
+        options={props.circleOptions}
       />
+      <Circle 
+        center={{ lat: 35.632896, lng: 139.91256 }}
+        radius={props.radius}
+        options={props.circleOptions}
+      />
+      <MyCircle
+        radius={props.radius} 
+        options={props.circleOptions} 
+        />
+     <Hello />
+{/*
     )}
+  */}
   </GoogleMap>
 ));
+
+class Hello extends React.Component {
+  render() {
+    return (
+      <div>hello
+      </div>
+    );
+  }
+}
+
+const MyCircle = (props) => {
+  return (
+    <Circle
+      defaultCenter={{ lat: 35.663405, lng: 139.87312 }}
+      defaultRadius={props.radius}
+      options={props.options}
+    />
+  );
+};
 
 export default MyMapComponent;
