@@ -3,21 +3,17 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash';
 
 import { compose, lifecycle, withProps } from 'recompose';
-/*
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-  Circle
-} from 'react-google-maps';
-*/
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
-import {GoogleMap, Marker, withGoogleMap, withScriptjs, Circle} from 'react-google-maps';
+import {
+  GoogleMap, 
+  Marker, 
+  withGoogleMap, 
+  withScriptjs, 
+  Circle
+} from 'react-google-maps';
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
-
 
 // 短期的 TODO
 
@@ -39,123 +35,6 @@ const googleMapsUrl = `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}`
 console.log(`googleMapsUrl = ${googleMapsUrl}`);
 
 // react-google-maps
-const MyMapComponent_ = compose(
-  lifecycle({
-    shouldComponentUpdate() {
-      console.log(`shouldComponentUpdate`);
-    },
-    componentDidMount() {
-      console.log(`componentDidMount`);
-    }
-  }),
-  withProps({
-    googleMapURL: googleMapsUrl,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `600px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
-    stations: [
-      {
-        name: "東京駅",
-        lat: 35.681167,
-        lng: 139.767052
-      },
-      {
-        name: "新浦安駅",
-        lat: 35.632896,
-        lng: 139.91256
-      },
-      {
-        name: "葛西駅",
-        lat: 35.663405,
-        lng: 139.87312
-      },
-      {
-        name: "幕張本郷駅",
-        lat: 35.672745,
-        lng: 140.042304
-      },
-      {
-        name: "両国駅",
-        lat: 35.695036,
-        lng: 139.793833
-      },
-      {
-        name: "武蔵小杉駅",
-        lat: 35.576634,
-        lng: 139.659466
-      },
-      {
-        name: "新宿駅",
-        lat: 35.689592,
-        lng: 139.700413
-      },
-      {
-        name: "流山おおたかのもり駅",
-        lat: 35.871811, 
-        lng: 139.925043
-      },
-      {
-        name: "花小金井駅",
-        lat: 35.726144,
-        lng: 139.513313
-      },
-      {
-        name: "読売ランド駅",
-        lat: 35.614768,
-        lng: 139.52815
-      },
-    ],
-    circleOptions: {
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
-      fillOpacity: 0.10
-    },
-    radius: 28000,
-    sliderValue: 14000,
-  }),
-  withScriptjs,
-  withGoogleMap
-)(props => (
-  <div>
-    <GoogleMap
-      defaultZoom={10}
-      defaultCenter={{ lat: 35.681167, lng: 139.767052 }}>
-      {/*
-        {props.isMarkerShown && (
-        <Marker position={{ lat: 35.681167, lng: 139.767052 }} />,
-      */}
-      {_.map(props.stations, (stations, index) => {
-        return (
-          <Hello />,
-          <MyCircle
-            key={index}
-            lat={props.stations[index].lat}
-            lng={props.stations[index].lng}
-            radius={props.radius}
-            options={props.circleOptions}
-        />
-        );
-      })}
-    </GoogleMap>
-    <Slider
-      min={1000}
-      max={28000}
-      value={props.sliderValue}
-      // onChange={handleOnChange}
-    />
-  </div>
-));
-
-class Hello extends React.Component {
-  render() {
-    return (
-      <div>hello
-      </div>
-    );
-  }
-};
 
 const MyCircle = (props) => {
   return (
@@ -168,12 +47,6 @@ const MyCircle = (props) => {
     />
   );
 };
-
-/*
-const handleOnChange = (props) => {
-  console.log(`handleOnChange props`);
-};
-*/
 
 class MyMapComponent extends React.Component {
   constructor(props) {
@@ -287,16 +160,8 @@ class MyMapComponent extends React.Component {
               ref = {this.mapLoaded.bind(this)}
               onZoomChanged= {this.zoomChanged.bind(this)}
              >
-{/*
-          <Circle
-            defaultCenter={{ lat: 35.663405, lng: 139.87312 }}
-            defaultRadius={1000}
-            options={props.options}
-          />
-*/}
           {_.map(props.stations, (stations, index) => {
             return (
-              <Hello />,
               <MyCircle
                 key={index}
                 lat={props.stations[index].lat}
