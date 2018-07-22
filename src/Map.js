@@ -55,11 +55,13 @@ class MyMapComponent extends React.Component {
       map: null,
       googleMapURL: googleMapsUrl,
       stations: [
+/*
         {
           name: "東京駅",
           lat: 35.681167,
           lng: 139.767052
         },
+*/
         {
           name: "新浦安駅",
           lat: 35.632896,
@@ -172,6 +174,15 @@ class MyMapComponent extends React.Component {
                 lng={props.stations[index].lng}
                 radius={props.sliderValue}
                 options={props.options}
+              />
+            );
+          })}
+          {_.map(props.stations, (stations, index) => {
+            return (
+              <Marker
+                key={index}
+                position={{ lat: props.stations[index].lat, lng: props.stations[index].lng }}
+                defaultTitle={props.stations[index].name}
               />
             );
           })}
