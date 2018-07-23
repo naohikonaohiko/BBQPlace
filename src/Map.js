@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import _ from 'lodash';
-
-import { compose, lifecycle, withProps } from 'recompose';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
-
 import {
   GoogleMap, 
   Marker, 
@@ -204,7 +200,7 @@ class MyMapComponent extends React.Component {
           <MyMapComponent
               googleMapURL={this.state.googleMapURL}
               loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<div style={{ height: `600px` }} />}
+              containerElement={<div style={{ height: `800px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
               options={this.state.circleOptions}
               stations={this.state.stations}
